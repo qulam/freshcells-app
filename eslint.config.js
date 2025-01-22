@@ -36,6 +36,7 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       '@typescript-eslint/no-unused-vars': ['error'],
       'import/order': [

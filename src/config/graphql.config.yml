@@ -1,0 +1,10 @@
+schema:
+  - 'https://cms.trial-task.k8s.ext.fcse.io/graphql'
+documents:
+  - './src/services/graphql/docs/*.graphql'
+generates:
+  ./src/services/graphql/index.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
