@@ -10,6 +10,7 @@ import {
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 import { Error } from '@app/components';
 import { LoginMutation, useLoginMutation } from '@app/services/graphql';
@@ -24,12 +25,15 @@ type TypeException = {
 };
 
 const Login = () => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'auth',
+  });
   const navigate = useNavigate();
   const handleOnCompletedLogin = (data: LoginMutation) => {
     notifications.show({
       color: 'green',
-      title: 'Success!',
-      message: 'You have successfully logged in to Freshcells. 🌟',
+      title: t('loginSuccessTitle'),
+      message: t('loginSuccessMessage'),
     });
 
     LocalStorage.setAuthToken(data.login.jwt);
@@ -43,10 +47,8 @@ const Login = () => {
 
     notifications.show({
       color: 'red',
-      title: error.graphQLErrors[0].message || 'Login Failed',
-      message:
-        errorMessage ||
-        'An error occurred while attempting to log in. Please try again later.',
+      title: error.graphQLErrors[0].message || t('loginErrorTitle'),
+      message: errorMessage || t('loginErrorMessage'),
     });
   };
 
@@ -64,9 +66,8 @@ const Login = () => {
 
     validate: {
       identifier: (value) =>
-        EMAIL_REGEX.test(value) ? null : 'Please use a valid email format',
-      password: (value) =>
-        value ? null : 'Password must consist of at least 6 characters',
+        EMAIL_REGEX.test(value) ? null : t('emailFormatError'),
+      password: (value) => (value ? null : t('passwordFormatError')),
     },
   });
 
@@ -79,21 +80,21 @@ const Login = () => {
     <ErrorBoundary fallback={<Error />}>
       <form onSubmit={form.onSubmit(handleOnSubmit)}>
         <TextInput
-          label="Email address"
-          placeholder="hello@gmail.com"
+          label={t('emailLabel')}
+          placeholder={t('emailPlaceholder')}
           size="md"
           key={form.key('identifier')}
           {...form.getInputProps('identifier')}
         />
         <PasswordInput
-          label="Password"
-          placeholder="Your password"
+          label={t('passwordLabel')}
+          placeholder={t('passwordPlaceholder')}
           mt="md"
           size="md"
           key={form.key('password')}
           {...form.getInputProps('password')}
         />
-        <Checkbox label="Keep me logged in" mt="xl" size="md" />
+        <Checkbox label={t('keepMeLoggedIn')} mt="xl" size="md" />
         <Button
           fullWidth
           mt="xl"
@@ -101,14 +102,14 @@ const Login = () => {
           type="submit"
           loading={isLoadingLogin}
         >
-          Login
+          {t('loginBtnText')}
         </Button>
       </form>
 
       <Text ta="center" mt="md">
-        Don&apos;t have an account?{' '}
+        {t('dontYouHaveAnAccount')}?{' '}
         <Anchor component={Link} to="/authentication/register" fw={700}>
-          Register
+          {t('register')}
         </Anchor>
       </Text>
     </ErrorBoundary>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Anchor, Box, Code, Flex, Group, Image, Title } from '@mantine/core';
 import {
   IconLayoutDashboard,
@@ -5,34 +6,51 @@ import {
   IconFingerprint,
   IconKey,
   IconLogout,
+  IconLanguage,
   IconReceipt2,
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, useNavigate, Navigate } from 'react-router';
+import { Languages } from '@app/models/language';
 import LocalStorage from '@app/services/storage/LocalStorage';
 import classes from './Dashboard.module.scss';
 
-const data = [
-  { link: '', label: 'Dashboard', icon: IconLayoutDashboard },
-  { link: '/profile', label: 'Profile', icon: IconUser },
-  { link: '/billing', label: 'Billing', icon: IconReceipt2 },
-  { link: '/security', label: 'Security', icon: IconFingerprint },
-  { link: '/ssh-keys', label: 'SSH Keys', icon: IconKey },
+const menuList = [
+  { link: '', label: 'dashboard', icon: IconLayoutDashboard },
+  { link: '/profile', label: 'profile', icon: IconUser },
+  { link: '/billing', label: 'billing', icon: IconReceipt2 },
+  { link: '/security', label: 'security', icon: IconFingerprint },
+  { link: '/ssh-keys', label: 'sshKeys', icon: IconKey },
   {
     link: '/databases',
-    label: 'Databases',
+    label: 'databases',
     icon: IconDatabaseImport,
   },
   {
     link: '/settings',
-    label: 'Other Settings',
+    label: 'otherSettings',
     icon: IconSettings,
   },
 ];
 
 const Dashboard = () => {
+  const langKey = LocalStorage.getLang() || 'en';
+  const [lang, setLang] = useState<Languages>(langKey);
+  const { t, i18n } = useTranslation('translation', {
+    keyPrefix: 'dashboard',
+  });
+
+  const inActiveLang = lang === 'en' ? 'ru' : 'en';
+  const changeLanguage = () => {
+    setLang(inActiveLang);
+
+    LocalStorage.setLang(inActiveLang);
+    i18n.changeLanguage(inActiveLang);
+  };
+
   const navigate = useNavigate();
 
   const authToken = LocalStorage.getAuthToken();
@@ -56,29 +74,33 @@ const Dashboard = () => {
             </Link>
             <Code fw={700}>Fresh Cells</Code>
           </Group>
-          {data.map((item) => (
+          {menuList.map((menu) => (
             <NavLink
               className={({ isActive }) =>
                 classNames(classes.link, { [classes.linkActive]: isActive })
               }
-              to={item.link}
-              key={item.label}
+              to={menu.link}
+              key={menu.label}
             >
-              <item.icon className={classes.linkIcon} stroke={1.5} />
-              <span>{item.label}</span>
+              <menu.icon className={classes.linkIcon} stroke={1.5} />
+              <span>{t(menu.label)}</span>
             </NavLink>
           ))}
         </div>
 
         <div className={classes.footer}>
+          <Anchor className={classes.link} onClick={changeLanguage}>
+            <IconLanguage className={classes.linkIcon} stroke={1.5} />
+            <span>{t(inActiveLang)}</span>
+          </Anchor>
           <Anchor className={classes.link} onClick={logout}>
             <IconLogout className={classes.linkIcon} stroke={1.5} />
-            <span>Logout</span>
+            <span>{t('logout')}</span>
           </Anchor>
         </div>
       </nav>
       <Box p={60} w="100%">
-        <Title mb={12}>Welcome To Freshcells 🚀</Title>
+        <Title mb={12}>{t('title')}</Title>
         <Outlet />
       </Box>
     </Flex>

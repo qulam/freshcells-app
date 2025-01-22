@@ -1,7 +1,10 @@
+import { Languages } from '@app/models/language';
+
 class LocalStorage {
   private static prefix = 'app_';
   private static keys = {
     ACCESS_TOKEN: 'accessToken',
+    LANG: 'lang',
   };
 
   static setItem(key: string, value: string): void {
@@ -26,6 +29,14 @@ class LocalStorage {
 
   static getAuthToken() {
     return this.getItem(this.keys.ACCESS_TOKEN);
+  }
+
+  static setLang(lang: Languages) {
+    this.setItem(this.keys.LANG, lang);
+  }
+
+  static getLang(): Languages {
+    return this.getItem(this.keys.LANG) as Languages;
   }
 }
 
