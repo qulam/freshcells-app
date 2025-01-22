@@ -1,8 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { MantineProvider } from '@mantine/core';
+import { LoadingOverlay, MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { Loading } from '@app/components';
 import { client } from '@app/config/apollo';
 import { theme } from '@app/config/theme';
 
@@ -33,7 +32,7 @@ const App = () => {
   return (
     <MantineProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingOverlay visible zIndex={1000} />}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Dashboard />}>

@@ -1,10 +1,14 @@
 import { Paper, Title } from '@mantine/core';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router';
 import { Error } from '@app/components';
+import LocalStorage from '@app/services/storage/LocalStorage';
 import classes from './Authentication.module.scss';
 
 const Authentication = () => {
+  const authToken = LocalStorage.getAuthToken();
+  if (authToken) return <Navigate to="/profile" />;
+
   return (
     <ErrorBoundary fallback={<Error />}>
       <div className={classes.wrapper}>
