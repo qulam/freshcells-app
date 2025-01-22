@@ -25,7 +25,9 @@
     "security": "Безопасность",
     "sshKeys": "SSH ключи",
     "databases": "Базы данных",
-    "otherSettings": "Другие настройки"
+    "otherSettings": "Другие настройки",
+    "en": "Английский",
+    "ru": "Русский"
   },
   "profile": {
     "firstName": "Имя",
