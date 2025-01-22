@@ -1,22 +1,22 @@
 import { lazy } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { client } from '@config/apollo';
-import { theme } from '@config/theme';
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import '@assets/css/index.scss';
+import { client } from '@app/config/apollo';
+import { theme } from '@app/config/theme';
+import '@app/assets/css/index.scss';
 
 const Dashboard = lazy(
-  () => import(/* webpackChunkName: "Dashboard" */ '@pages/dashboard')
+  () => import(/* webpackChunkName: "Dashboard" */ '@app/pages/dashboard')
 );
 const Login = lazy(
-  () => import(/* webpackChunkName: "Login" */ '@pages/login')
+  () => import(/* webpackChunkName: "Login" */ '@app/pages/login')
 );
 const Profile = lazy(
-  () => import(/* webpackChunkName: "Profile" */ '@pages/profile')
+  () => import(/* webpackChunkName: "Profile" */ '@app/pages/profile')
 );
 const NotFound = lazy(
-  () => import(/* webpackChunkName: "NotFound" */ '@pages/not-found')
+  () => import(/* webpackChunkName: "NotFound" */ '@app/pages/not-found')
 );
 
 const App = () => {
