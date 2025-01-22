@@ -43,12 +43,12 @@ const Dashboard = () => {
     keyPrefix: 'dashboard',
   });
 
-  const targetLangKey = lang === 'en' ? 'ru' : 'en';
+  const inActiveLang = lang === 'en' ? 'ru' : 'en';
   const changeLanguage = () => {
-    setLang(targetLangKey);
+    setLang(inActiveLang);
 
-    LocalStorage.setLang(targetLangKey);
-    i18n.changeLanguage(targetLangKey);
+    LocalStorage.setLang(inActiveLang);
+    i18n.changeLanguage(inActiveLang);
   };
 
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ const Dashboard = () => {
         <div className={classes.footer}>
           <Anchor className={classes.link} onClick={changeLanguage}>
             <IconLanguage className={classes.linkIcon} stroke={1.5} />
-            <span>{t(targetLangKey)}</span>
+            <span>{t(inActiveLang)}</span>
           </Anchor>
           <Anchor className={classes.link} onClick={logout}>
             <IconLogout className={classes.linkIcon} stroke={1.5} />
