@@ -50,7 +50,7 @@ export default [
           'newlines-between': 'ignore',
           pathGroups: [
             {
-              pattern: '@freshcells-app/**',
+              pattern: '@app/**',
               group: 'internal',
               position: 'after',
             },

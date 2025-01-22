@@ -1,36 +1,55 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { client } from '@config/apollo';
-import { theme } from '@config/theme';
 import { MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import '@assets/css/index.scss';
+import { Loading } from '@app/components';
+import { client } from '@app/config/apollo';
+import { theme } from '@app/config/theme';
+
+import '@app/assets/css/index.scss';
 
 const Dashboard = lazy(
-  () => import(/* webpackChunkName: "Dashboard" */ '@pages/dashboard')
+  () => import(/* webpackChunkName: "Dashboard" */ '@app/pages/dashboard')
 );
+
+const Authentication = lazy(
+  () =>
+    import(/* webpackChunkName: "Authentication" */ '@app/pages/authentication')
+);
+
 const Login = lazy(
-  () => import(/* webpackChunkName: "Login" */ '@pages/login')
+  () => import(/* webpackChunkName: "Login" */ '@app/pages/login')
 );
+
 const Profile = lazy(
-  () => import(/* webpackChunkName: "Profile" */ '@pages/profile')
+  () => import(/* webpackChunkName: "Profile" */ '@app/pages/profile')
 );
+
 const NotFound = lazy(
-  () => import(/* webpackChunkName: "NotFound" */ '@pages/not-found')
+  () => import(/* webpackChunkName: "NotFound" */ '@app/pages/not-found')
 );
 
 const App = () => {
   return (
     <MantineProvider theme={theme}>
       <ApolloProvider client={client}>
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<Dashboard />} />
-            <Route path="login" element={<Login />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Dashboard />}>
+                <Route path="profile" element={<Profile />} />
+                {/* add new protected pages - users, reports, settings and etc... */}
+              </Route>
+
+              <Route path="authentication" element={<Authentication />}>
+                <Route path="login" element={<Login />} />
+                {/* add new auth pages - register, forgot password and etc... */}
+              </Route>
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
       </ApolloProvider>
     </MantineProvider>
   );
