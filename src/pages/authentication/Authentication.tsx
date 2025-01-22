@@ -16,7 +16,7 @@ const Authentication = () => {
             mt="md"
             mb={50}
           >
-            Welcome back to Fresh Cells!
+            Welcome to Freshcells 🚀
           </Title>
 
           <Outlet />
