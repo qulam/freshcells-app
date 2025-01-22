@@ -1,11 +1,16 @@
 import { Paper, Title } from '@mantine/core';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet } from 'react-router';
 import { Error } from '@app/components';
 import LocalStorage from '@app/services/storage/LocalStorage';
 import classes from './Authentication.module.scss';
 
 const Authentication = () => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'auth',
+  });
+
   const authToken = LocalStorage.getAuthToken();
   if (authToken) return <Navigate to="/profile" />;
 
@@ -20,7 +25,7 @@ const Authentication = () => {
             mt="md"
             mb={50}
           >
-            Welcome to Freshcells 🚀
+            {t('title')}
           </Title>
 
           <Outlet />

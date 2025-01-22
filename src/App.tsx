@@ -3,8 +3,9 @@ import { ApolloProvider } from '@apollo/client';
 import { LoadingOverlay, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { client } from '@app/config/apollo';
+import { client } from '@app/config/apollo/apollo';
 import { theme } from '@app/config/theme';
+import '@app/config/i18/config.ts';
 
 import '@app/assets/css/index.scss';
 
