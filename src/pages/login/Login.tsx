@@ -1,4 +1,3 @@
-import { gql, useMutation } from '@apollo/client';
 import {
   Anchor,
   Button,
@@ -11,37 +10,40 @@ import { useForm } from '@mantine/form';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Link } from 'react-router';
 import { Error } from '@app/components';
+import { LoginMutation, useLoginMutation } from '@app/services/graphql';
+import LocalStorage from '@app/services/storage/LocalStorage';
 
-const DEFAULT_PASSWORD = 'test@freshcells.de';
 const DEFAULT_EMAIL = 'test@freshcells.de';
-
-const LOGIN = gql`
-  # Increments a back-end counter and gets its resulting value
-  mutation IncrementCounter {
-    currentValue
-  }
-`;
+const DEFAULT_PASSWORD = 'KTKwXm2grV4wHzW';
+const EMAIL_REGEX = /^\S+@\S+$/;
 
 const Login = () => {
-  const [login, { loading, error }] = useMutation(LOGIN);
+  const handleOnCompletedLogin = (data: LoginMutation) => {
+    LocalStorage.setAuthToken(data.login.jwt);
+  };
+
+  const [login, { loading, error }] = useLoginMutation({
+    onCompleted: handleOnCompletedLogin,
+  });
 
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
-      email: DEFAULT_EMAIL,
+      identifier: DEFAULT_EMAIL,
       password: DEFAULT_PASSWORD,
     },
 
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      identifier: (value) =>
+        EMAIL_REGEX.test(value) ? null : 'Please use a valid email format',
+      password: (value) =>
+        value ? null : 'Password must consist of at least 6 characters',
     },
   });
 
   const handleOnSubmit = (values: typeof form.values) => {
-    const { email, password } = values;
-    console.log('email', values.email);
-    console.log('passowrd', values.password);
-    login({ variables: { password, email } });
+    const { identifier, password } = values;
+    login({ variables: { password, identifier } });
   };
 
   if (loading) return 'loading...';
@@ -54,8 +56,8 @@ const Login = () => {
           label="Email address"
           placeholder="hello@gmail.com"
           size="md"
-          key={form.key('email')}
-          {...form.getInputProps('email')}
+          key={form.key('identifier')}
+          {...form.getInputProps('identifier')}
         />
         <PasswordInput
           label="Password"
