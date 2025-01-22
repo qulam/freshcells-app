@@ -8,7 +8,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Link } from 'react-router';
+import {Link, useNavigate} from 'react-router';
 import { Error } from '@app/components';
 import { LoginMutation, useLoginMutation } from '@app/services/graphql';
 import LocalStorage from '@app/services/storage/LocalStorage';
@@ -18,11 +18,13 @@ const DEFAULT_PASSWORD = 'KTKwXm2grV4wHzW';
 const EMAIL_REGEX = /^\S+@\S+$/;
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleOnCompletedLogin = (data: LoginMutation) => {
     LocalStorage.setAuthToken(data.login.jwt);
+    navigate('/profile');
   };
 
-  const [login, { loading, error }] = useLoginMutation({
+  const [login, { loading: isLoadingLogin }] = useLoginMutation({
     onCompleted: handleOnCompletedLogin,
   });
 
@@ -46,9 +48,6 @@ const Login = () => {
     login({ variables: { password, identifier } });
   };
 
-  if (loading) return 'loading...';
-  if (error) return 'error...';
-
   return (
     <ErrorBoundary fallback={<Error />}>
       <form onSubmit={form.onSubmit(handleOnSubmit)}>
@@ -68,7 +67,13 @@ const Login = () => {
           {...form.getInputProps('password')}
         />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button fullWidth mt="xl" size="md" type="submit">
+        <Button
+          fullWidth
+          mt="xl"
+          size="md"
+          type="submit"
+          loading={isLoadingLogin}
+        >
           Login
         </Button>
       </form>
