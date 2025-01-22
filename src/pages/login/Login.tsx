@@ -8,7 +8,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { ErrorBoundary } from 'react-error-boundary';
-import {Link, useNavigate} from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { Error } from '@app/components';
 import { LoginMutation, useLoginMutation } from '@app/services/graphql';
 import LocalStorage from '@app/services/storage/LocalStorage';
