@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client';
 import {
   Anchor,
   Button,
@@ -7,6 +8,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Link, useNavigate } from 'react-router';
 import { Error } from '@app/components';
@@ -17,15 +19,40 @@ const DEFAULT_EMAIL = 'test@freshcells.de';
 const DEFAULT_PASSWORD = 'KTKwXm2grV4wHzW';
 const EMAIL_REGEX = /^\S+@\S+$/;
 
+type TypeException = {
+  data: { data: { messages: { message: string }[] }[] };
+};
+
 const Login = () => {
   const navigate = useNavigate();
   const handleOnCompletedLogin = (data: LoginMutation) => {
+    notifications.show({
+      color: 'green',
+      title: 'Success!',
+      message: 'You have successfully logged in to Freshcells. 🌟',
+    });
+
     LocalStorage.setAuthToken(data.login.jwt);
     navigate('/profile');
   };
 
+  const handleOnErrorLogin = (error: ApolloError) => {
+    const exception = error.graphQLErrors[0].extensions
+      ?.exception as TypeException;
+    const errorMessage = exception?.data.data[0].messages[0].message;
+
+    notifications.show({
+      color: 'red',
+      title: error.graphQLErrors[0].message || 'Login Failed',
+      message:
+        errorMessage ||
+        'An error occurred while attempting to log in. Please try again later.',
+    });
+  };
+
   const [login, { loading: isLoadingLogin }] = useLoginMutation({
     onCompleted: handleOnCompletedLogin,
+    onError: handleOnErrorLogin,
   });
 
   const form = useForm({

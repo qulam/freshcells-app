@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { LoadingOverlay, MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { client } from '@app/config/apollo';
 import { theme } from '@app/config/theme';
@@ -31,6 +32,7 @@ const NotFound = lazy(
 const App = () => {
   return (
     <MantineProvider theme={theme}>
+      <Notifications />
       <ApolloProvider client={client}>
         <Suspense fallback={<LoadingOverlay visible zIndex={1000} />}>
           <BrowserRouter>
