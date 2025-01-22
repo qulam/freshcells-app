@@ -16,7 +16,6 @@ i18n.use(initReactI18next).init({
     },
   },
   lng: langKey as string,
-  debug: process.env.NODE_ENV === 'development',
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

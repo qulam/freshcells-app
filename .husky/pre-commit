@@ -3,3 +3,4 @@
 
 bun run lint
 tsc --noEmit
+bun run test
