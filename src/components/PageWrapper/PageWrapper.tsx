@@ -16,7 +16,7 @@ const PageWrapper = ({
   isLoading = false,
   isError = false,
 }: PageWrapperProps) => {
-  if (isError) return <h1>Something went wrong</h1>;
+  if (isError) return <Error />;
 
   return (
     <ErrorBoundary fallback={<Error />}>
