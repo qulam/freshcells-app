@@ -1,21 +1,34 @@
 {
   "name": "freshcells-app",
   "private": true,
+  "type": "module",
   "version": "1.0.0",
   "scripts": {
     "dev": "rsbuild dev --open",
     "build": "rsbuild build",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "lint": "eslint --fix . && prettier --write .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "globals": "^15.14.0",
     "@rsbuild/core": "^1.1.8",
     "@rsbuild/plugin-react": "^1.0.7",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "@eslint/js": "^9.17.0",
+    "eslint": "8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "typescript-eslint": "^8.18.2",
+    "prettier": "^3.4.2"
   }
 }
