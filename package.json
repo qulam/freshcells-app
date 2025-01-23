@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "api-gen": "graphql-codegen --config src/config/apollo/graphql.config.yml",
     "test": "jest --runInBand",
-    "test:coverage": "jest --watch --coverage"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.12.7",
