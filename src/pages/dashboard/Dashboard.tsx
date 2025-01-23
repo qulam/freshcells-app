@@ -36,6 +36,9 @@ const menuList = [
   },
 ];
 
+const getNavLinkClassName = ({ isActive }: { isActive?: boolean }) =>
+  classNames(classes.link, { [classes.linkActive]: isActive });
+
 const Dashboard = () => {
   const langKey = LocalStorage.getLang() || 'en';
   const [lang, setLang] = useState<Languages>(langKey);
@@ -76,9 +79,7 @@ const Dashboard = () => {
           </Group>
           {menuList.map((menu) => (
             <NavLink
-              className={({ isActive }) =>
-                classNames(classes.link, { [classes.linkActive]: isActive })
-              }
+              className={getNavLinkClassName}
               to={menu.link}
               key={menu.label}
             >
