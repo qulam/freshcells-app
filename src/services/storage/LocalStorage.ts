@@ -1,8 +1,8 @@
 import { Languages } from '@app/models/language';
 
 class LocalStorage {
-  private static prefix = 'app_';
-  private static keys = {
+  static prefix = 'app_';
+  static keys = {
     ACCESS_TOKEN: 'accessToken',
     LANG: 'lang',
   };
