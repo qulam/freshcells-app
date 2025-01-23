@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
-import {useTranslation} from "react-i18next";
-import {Navigate, useNavigate} from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { Navigate, useNavigate } from 'react-router';
 import LocalStorage from '@app/services/storage/LocalStorage';
 import Dashboard from './Dashboard';
 import { renderWithProvider } from '../../../jest.setup';
@@ -10,9 +10,7 @@ describe('Dashboard Component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (useNavigate as jest.Mock).mockReturnValue(
-      mockNavigate
-    );
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
   });
 
   it('should redirect to /authentication/login if no authToken exists', () => {
@@ -20,7 +18,10 @@ describe('Dashboard Component', () => {
 
     renderWithProvider(<Dashboard />);
 
-    expect(Navigate).toHaveBeenCalledWith({ to: '/authentication/login' }, undefined);
+    expect(Navigate).toHaveBeenCalledWith(
+      { to: '/authentication/login' },
+      undefined
+    );
   });
 
   it('should render the Dashboard with menu and footer links if authToken exists', () => {
