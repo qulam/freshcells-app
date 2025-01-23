@@ -5,12 +5,13 @@ import { useUserQuery } from '@app/services/graphql';
 import LocalStorage from '@app/services/storage/LocalStorage';
 import { mayBeNull, parseJwtPayload } from '@app/utils/helpers';
 
-const authToken = LocalStorage.getAuthToken();
-
 const Profile = () => {
+  const authToken = LocalStorage.getAuthToken();
+
   const { t } = useTranslation('translation', {
     keyPrefix: 'profile',
   });
+
   const loggedUserId = authToken && parseJwtPayload(authToken).id;
   const {
     loading: isLoadingGetUser,

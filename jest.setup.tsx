@@ -39,6 +39,11 @@ LocalStorage.setLang = jest.fn();
 LocalStorage.getItem = jest.fn();
 LocalStorage.clear = jest.fn();
 
+jest.mock('@app/services/graphql', () => ({
+  ...jest.requireActual('@app/services/graphql'),
+  useUserQuery: jest.fn(),
+}));
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
