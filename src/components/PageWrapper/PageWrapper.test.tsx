@@ -4,6 +4,10 @@ import PageWrapper from './PageWrapper';
 import { renderWithProvider } from '../../../jest.setup';
 
 describe('PageWrapper Component', () => {
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should render children content when not loading and no error occurs', () => {
     renderWithProvider(
       <PageWrapper heading="Test Heading" isLoading={false} isError={false}>
