@@ -41,13 +41,13 @@ const Login = () => {
   };
 
   const handleOnErrorLogin = (error: ApolloError) => {
-    const exception = error.graphQLErrors[0].extensions
-      ?.exception as TypeException;
-    const errorMessage = exception?.data.data[0].messages[0].message;
+    const graphQLError = error?.graphQLErrors?.[0];
+    const exception = graphQLError?.extensions?.exception as TypeException;
+    const errorMessage = exception?.data?.data?.[0]?.messages?.[0]?.message;
 
     notifications.show({
       color: 'red',
-      title: error.graphQLErrors[0].message || t('loginErrorTitle'),
+      title: graphQLError?.message || t('loginErrorTitle'),
       message: errorMessage || t('loginErrorMessage'),
     });
   };
@@ -106,7 +106,7 @@ const Login = () => {
         </Button>
       </form>
 
-      <Text ta="center" mt="md">
+      <Text ta="center" mt="md" component="div">
         {t('dontYouHaveAnAccount')}?{' '}
         <Anchor component={Link} to="/authentication/register" fw={700}>
           {t('register')}

@@ -33,6 +33,7 @@ jest.mock('react-router', () => ({
 
 jest.mock('@app/services/storage/LocalStorage');
 LocalStorage.getAuthToken = jest.fn();
+LocalStorage.setAuthToken = jest.fn();
 LocalStorage.getLang = jest.fn();
 LocalStorage.getLang = jest.fn();
 LocalStorage.setLang = jest.fn();
@@ -42,6 +43,10 @@ LocalStorage.clear = jest.fn();
 jest.mock('@app/services/graphql', () => ({
   ...jest.requireActual('@app/services/graphql'),
   useUserQuery: jest.fn(),
+  useLoginMutation: jest.fn(() => [
+    jest.fn(),
+    { data: undefined, loading: false, error: undefined },
+  ]),
 }));
 
 Object.defineProperty(window, 'matchMedia', {
@@ -65,6 +70,12 @@ jest.mock('react-i18next', () => {
     useTranslation: jest.fn(actual.useTranslation),
   };
 });
+
+jest.mock('@mantine/notifications', () => ({
+  notifications: {
+    show: jest.fn(),
+  },
+}));
 
 i18n.use(initReactI18next).init({
   resources: {
