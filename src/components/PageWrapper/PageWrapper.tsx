@@ -21,7 +21,11 @@ const PageWrapper = ({
   return (
     <ErrorBoundary fallback={<Error />}>
       <Box pos="relative" h="100%">
-        <LoadingOverlay visible={isLoading} zIndex={1000} />
+        <LoadingOverlay
+          aria-label="loading-overlay"
+          visible={isLoading}
+          zIndex={1000}
+        />
         <Box w={500}>
           <Text mb={12}>{heading}</Text>
           {children}
