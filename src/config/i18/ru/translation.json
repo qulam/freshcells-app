@@ -1,0 +1,47 @@
+{
+  "auth": {
+    "title": "Добро пожаловать в Freshcells \uD83D\uDE80",
+    "loginSuccessTitle": "Успех!",
+    "loginSuccessMessage": "Вы успешно вошли в Freshcells. \uD83C\uDF1F",
+    "loginErrorTitle": "Ошибка входа",
+    "loginErrorMessage": "Произошла ошибка при попытке войти. Пожалуйста, попробуйте снова позже.",
+    "emailFormatError": "Пожалуйста, используйте правильный формат электронной почты",
+    "passwordFormatError": "Пароль должен содержать как минимум 6 символов",
+    "emailLabel": "Адрес электронной почты",
+    "emailPlaceholder": "hello@gmail.com",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Ваш пароль",
+    "loginBtnText": "Войти",
+    "dontYouHaveAnAccount": "Нет аккаунта?",
+    "register": "Зарегистрироваться",
+    "keepMeLoggedIn": "Оставаться в системе"
+  },
+  "dashboard": {
+    "logout": "Выйти",
+    "title": "Добро пожаловать в Freshcells \uD83D\uDE80",
+    "dashboard": "Панель управления",
+    "profile": "Профиль",
+    "billing": "Платежи",
+    "security": "Безопасность",
+    "sshKeys": "SSH ключи",
+    "databases": "Базы данных",
+    "otherSettings": "Другие настройки",
+    "en": "Английский",
+    "ru": "Русский"
+  },
+  "profile": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "heading": "Ваша информация профиля"
+  },
+  "notFound": {
+    "title": "Вы нашли секретное место.",
+    "description": "К сожалению, это только страница 404. Возможно, вы ошиблись в адресе или страница была перемещена на другой URL.",
+    "goBack": "Вернуться на главную страницу"
+  },
+  "error": {
+    "title": "Что-то пошло не так...",
+    "description": "Наши серверы не смогли обработать ваш запрос. Не переживайте, наша команда разработчиков уже уведомлена. Попробуйте обновить страницу.",
+    "refreshPage": "Обновить страницу"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "auth": {
+    "title": "Welcome to Freshcells \uD83D\uDE80",
+    "loginSuccessTitle": "Success!",
+    "loginSuccessMessage": "You have successfully logged in to Freshcells. \uD83C\uDF1F",
+    "loginErrorTitle": "Login Failed",
+    "loginErrorMessage": "An error occurred while attempting to log in. Please try again later.",
+    "emailFormatError": "Please use a valid email format",
+    "passwordFormatError": "Password must consist of at least 6 characters",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "hello@gmail.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "loginBtnText": "Login",
+    "dontYouHaveAnAccount": "Don&apos;t have an account",
+    "register": "Register",
+    "keepMeLoggedIn": "Keep me logged in"
+  },
+  "dashboard": {
+    "logout": "Logout",
+    "title": "Welcome To Freshcells \uD83D\uDE80",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "billing": "Billing",
+    "security": "Security",
+    "sshKeys": "SSH Keys",
+    "databases": "Databases",
+    "otherSettings": "Other Settings",
+    "en": "English",
+    "ru": "Russian"
+  },
+  "profile": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "heading": "Your profile information"
+  },
+  "notFound": {
+    "title": "You have found a secret place.",
+    "description": "Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved to another URL.",
+    "goBack": "Take me back to home page"
+  },
+  "error": {
+    "title": "Something bad just happened...",
+    "description": "Our servers could not handle your request. Don&apos;t worry, our development team was already notified. Try refreshing the page.",
+    "refreshPage": "Refresh the page"
+  }
+}
